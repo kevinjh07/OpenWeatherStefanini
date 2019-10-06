@@ -2,10 +2,19 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="OpenWeatherStefanini.Views.MainPage"
-             Title="{Binding Title}">
+             Title="Clima">
 
-    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-        <Label Text="Welcome to Xamarin Forms and Prism!" />
-    </StackLayout>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Pesquisar" Order="Primary" Icon="ic_fa_search.png" />
+    </ContentPage.ToolbarItems>
 
+    <ContentPage.Content>
+        <ContentView>
+            <ContentView.Content>
+                <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                    <Label Text="Welcome to Xamarin Forms and Prism!" />
+                </StackLayout>
+            </ContentView.Content>
+        </ContentView>
+    </ContentPage.Content>
 </ContentPage>

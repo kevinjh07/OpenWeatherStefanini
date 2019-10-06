@@ -205,5 +205,11 @@
   <ItemGroup>
     <LinkDescription Include="linker.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_fa_search%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_fa_search%403x.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
