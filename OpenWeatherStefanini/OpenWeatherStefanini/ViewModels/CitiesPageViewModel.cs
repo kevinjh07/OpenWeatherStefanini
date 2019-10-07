@@ -1,5 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using OpenWeatherStefanini.Models;
+using OpenWeatherStefanini.Utils;
+using Prism.Commands;
 using Prism.Navigation;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,6 +11,8 @@ namespace OpenWeatherStefanini.ViewModels
 {
     public class CitiesPageViewModel : ViewModelBase
     {
+        public DelegateCommand<City> ItemTappedCommand { get; private set; }
+
         private ObservableCollection<City> cities;
         public ObservableCollection<City> Cities {
             get { return cities; }
@@ -18,12 +22,21 @@ namespace OpenWeatherStefanini.ViewModels
         public CitiesPageViewModel(INavigationService navigationService)
             : base(navigationService)
         {
-
+            ItemTappedCommand = new DelegateCommand<City>(ShowCityDetails);
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             GetJsonData();
+        }
+
+        private void ShowCityDetails(City selectedCity)
+        {
+            var parameters = new NavigationParameters
+            {
+                { NavigationParamKey.SelectedCity, selectedCity }
+            };
+            NavigationService.NavigateAsync(PageName.CityDetailsPage, parameters);
         }
 
         private void GetJsonData()

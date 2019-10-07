@@ -20,6 +20,10 @@ namespace OpenWeatherStefanini
 
         public App(IPlatformInitializer initializer) : base(initializer) { }
 
+        public double NamedFontSize {
+            get { return Device.GetNamedSize(NamedSize.Small, typeof(Label)); }
+        }
+
         protected override async void OnInitialized()
         {
             InitializeComponent();
@@ -32,6 +36,7 @@ namespace OpenWeatherStefanini
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
             containerRegistry.RegisterForNavigation<CitiesPage, CitiesPageViewModel>();
+            containerRegistry.RegisterForNavigation<CityDetailsPage, CityDetailsPageViewModel>();
         }
     }
 }

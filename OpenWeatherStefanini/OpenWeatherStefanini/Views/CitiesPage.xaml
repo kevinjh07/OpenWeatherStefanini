@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="OpenWeatherStefanini.Views.CitiesPage"
              Title="Selecione a cidade">
@@ -9,6 +10,15 @@
         <ContentView>
             <ContentView.Content>
                 <ListView ItemsSource="{Binding Cities}" IsRefreshing="{Binding IsBusy}" HasUnevenRows="True">
+                    <ListView.Behaviors>
+                        <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding ItemTappedCommand}"
+                                                  EventArgsParameterPath="Item"/>
+                    </ListView.Behaviors>
+                    <ListView.Header>
+                        <StackLayout BackgroundColor="{StaticResource Gray200}">
+                            <Label Text="Cidade" Style="{StaticResource LabelHeaderStyle}" />
+                        </StackLayout>
+                    </ListView.Header>
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <TextCell Text="{Binding Name}" />
