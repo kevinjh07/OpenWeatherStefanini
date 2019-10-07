@@ -3,16 +3,48 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
-             xmlns:converter="clr-namespace:OpenWeatherStefanini.Converters"
+             xmlns:converters="clr-namespace:OpenWeatherStefanini.Converters"
              x:Class="OpenWeatherStefanini.Views.CityDetailsPage"
              Title="Detalhes">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <converter:FavoritedCityToIconConverter x:Key="FavoritedCityToIconConverter" />
+            <converters:FavoritedCityToIconConverter x:Key="FavoritedCityToIconConverter" />
+            <converters:InverseBooleanConverter x:Key="InverseBooleanConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem Icon="{Binding City.Favorited, Converter={StaticResource FavoritedCityToIconConverter}}" 
                      Command="{Binding AddOrRemoveFavoriteCityCommand}" />
     </ContentPage.ToolbarItems>
+    <ContentView>
+        <ContentView.Content>
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <ActivityIndicator HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                                   IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" />
+                <StackLayout IsVisible="{Binding IsBusy, Converter={StaticResource InverseBooleanConverter}}"
+                             Padding="10" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                    <StackLayout Padding="0, 0, 0, 10">
+                        <Label HorizontalOptions="Center" Text="{Binding City.Name}" FontSize="Large" />
+                    </StackLayout>
+                    <StackLayout Padding="0, 0, 0, 10" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Orientation="Horizontal">
+                        <Label Text="{Binding City.Weather.Temp}" HorizontalOptions="Start" FontSize="Large" />
+                        <StackLayout HorizontalOptions="End">
+                            <Image Source="{Binding City.Weather.Icon}" WidthRequest="100" HeightRequest="100" />
+                            <Label Text="{Binding City.Weather.Description}" FontSize="Medium" />
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout Padding="0, 0, 0, 10">
+                        <StackLayout Orientation="Horizontal">
+                            <Label HorizontalOptions="Start" Text="Temp. Máxima:" FontSize="Medium" />
+                            <Label HorizontalOptions="Start" Text="{Binding City.Weather.TempMin}"  FontSize="Medium" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label HorizontalOptions="Start" Text="Temp. Máxima:" FontSize="Medium" />
+                            <Label HorizontalOptions="Start" Text="{Binding City.Weather.TempMax}" FontSize="Medium" />
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </ContentView.Content>
+    </ContentView>
 </ContentPage>

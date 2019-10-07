@@ -13,5 +13,7 @@
         public int Zoom { get; set; }
 
         public bool Favorited { get; set; }
+
+        public Weather Weather { get; set; }
     }
 }

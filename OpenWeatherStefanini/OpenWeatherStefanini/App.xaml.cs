@@ -40,6 +40,7 @@ namespace OpenWeatherStefanini
             #region Services
             containerRegistry.RegisterSingleton<FavoriteCityService>();
             containerRegistry.RegisterSingleton<ResourceDataService>();
+            containerRegistry.RegisterSingleton<RestService>();
             #endregion
         }
     }
