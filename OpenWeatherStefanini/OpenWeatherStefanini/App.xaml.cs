@@ -4,6 +4,7 @@ using OpenWeatherStefanini.ViewModels;
 using OpenWeatherStefanini.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using OpenWeatherStefanini.Utils;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace OpenWeatherStefanini
@@ -23,13 +24,14 @@ namespace OpenWeatherStefanini
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationPage/MainPage");
+            await NavigationService.NavigateAsync($"NavigationPage/{PageName.MainPage}");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+            containerRegistry.RegisterForNavigation<CitiesPage, CitiesPageViewModel>();
         }
     }
 }

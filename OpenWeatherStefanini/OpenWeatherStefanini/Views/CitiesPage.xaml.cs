@@ -2,9 +2,9 @@
 
 namespace OpenWeatherStefanini.Views
 {
-    public partial class MainPage : ContentPage
+    public partial class CitiesPage : ContentPage
     {
-        public MainPage()
+        public CitiesPage()
         {
             InitializeComponent();
         }

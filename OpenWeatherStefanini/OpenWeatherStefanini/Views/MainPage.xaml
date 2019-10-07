@@ -5,7 +5,7 @@
              Title="Clima">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Pesquisar" Order="Primary" Icon="ic_fa_search.png" />
+        <ToolbarItem Text="Pesquisar" Order="Primary" Icon="ic_fa_search.png" Command="{Binding CitiesPageCommand}" />
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>

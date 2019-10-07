@@ -19,6 +19,7 @@
     <type fullname="OpenWeatherStefanini.Views.*Page">
       <method name=".ctor"/>
     </type>
+    <type fullname="OpenWeatherStefanini.Models.*"/>
     <type fullname="OpenWeatherStefanini.Resources.*"/>
     <type fullname="OpenWeatherStefanini.ViewModels.*"/>
     <type fullname="OpenWeatherStefanini.App"/>
