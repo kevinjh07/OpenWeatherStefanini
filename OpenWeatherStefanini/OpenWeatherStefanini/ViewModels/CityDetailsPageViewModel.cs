@@ -29,6 +29,7 @@ namespace OpenWeatherStefanini.ViewModels
             RestService restService, PageDialogService pageDialogService)
             : base(navigationService)
         {
+            City = new City();
             _cityRegistrationService = cityRegistrationService;
             _restService = restService;
             _pageDialogService = pageDialogService;
@@ -62,16 +63,19 @@ namespace OpenWeatherStefanini.ViewModels
 
         private void AddOrRemoveFavoriteCity()
         {
-            City.Favorited = !City.Favorited;
-            var favoriteCity = new FavoriteCity(City.Id);
-            if (City.Favorited)
+            if (!IsBusy)
             {
-                _cityRegistrationService.SaveFavoriteCityAsync(favoriteCity);
-            } else
-            {
-                _cityRegistrationService.DeleteFavoriteCityAsync(favoriteCity);
+                City.Favorited = !City.Favorited;
+                var favoriteCity = new FavoriteCity(City.Id);
+                if (City.Favorited)
+                {
+                    _cityRegistrationService.SaveFavoriteCityAsync(favoriteCity);
+                } else
+                {
+                    _cityRegistrationService.DeleteFavoriteCityAsync(favoriteCity);
+                }
+                RaisePropertyChanged("City");
             }
-            RaisePropertyChanged("City");
         }
     }
 }

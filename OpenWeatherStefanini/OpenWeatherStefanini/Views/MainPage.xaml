@@ -2,16 +2,26 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             xmlns:converters="clr-namespace:OpenWeatherStefanini.Converters"
              x:Class="OpenWeatherStefanini.Views.MainPage"
              Title="Clima">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem Icon="ic_fa_search.png" Command="{Binding CitiesPageCommand}" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <ContentView>
             <ContentView.Content>
-                <StackLayout>
-                    <ListView ItemsSource="{Binding Cities}" HasUnevenRows="True"
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <StackLayout IsVisible="{Binding NofavoriteCities}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                        <Label Text="Não há cidades marcadas como favorito." />
+                    </StackLayout>
+                    <ListView ItemsSource="{Binding Cities}" HasUnevenRows="True" 
+                              IsVisible="{Binding NofavoriteCities, Converter={StaticResource InverseBooleanConverter}}"
                               IsPullToRefreshEnabled="True" IsRefreshing="{Binding IsBusy}"
                               RefreshCommand="{Binding GetFavoriteCitiesAndWeatherCommand}">
                         <ListView.Behaviors>
@@ -40,8 +50,8 @@
                                             <ColumnDefinition Width="1*" />
                                         </Grid.ColumnDefinitions>
                                         <Label Grid.Column="0" Text="{Binding Name}" Style="{StaticResource LabelCenterStyle}" />
-                                        <Label Grid.Column="1" Text="{Binding Weather}" Style="{StaticResource LabelCenterStyle}" />
-                                        <Label Grid.Column="2" Text="{Binding Temp}" Style="{StaticResource LabelCenterStyle}" />
+                                        <Label Grid.Column="1" Text="{Binding Weather.Description}" Style="{StaticResource LabelCenterStyle}" />
+                                        <Label Grid.Column="2" Text="{Binding Weather.Temp}" Style="{StaticResource LabelCenterStyle}" />
                                     </Grid>
                                 </ViewCell>
                             </DataTemplate>

@@ -3,6 +3,9 @@ using OpenWeatherStefanini.Services;
 using OpenWeatherStefanini.Utils;
 using Prism.Commands;
 using Prism.Navigation;
+using Prism.Services;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,14 +24,24 @@ namespace OpenWeatherStefanini.ViewModels
 
         private readonly FavoriteCityService _favoriteCityService;
 
+        private readonly RestService _restService;
+
+        private readonly PageDialogService _pageDialogService;
+
+        private bool nofavoriteCities;
+        public bool NofavoriteCities {
+            get { return nofavoriteCities; }
+            set { SetProperty(ref nofavoriteCities, value); }
+        }
+
         private ObservableCollection<City> cities;
         public ObservableCollection<City> Cities {
             get { return cities; }
             private set { SetProperty(ref cities, value); }
         }
 
-        public MainPageViewModel(INavigationService navigationService, ResourceDataService resourceDataService, 
-            FavoriteCityService favoriteCityService)
+        public MainPageViewModel(INavigationService navigationService, ResourceDataService resourceDataService,
+            FavoriteCityService favoriteCityService, RestService restService, PageDialogService pageDialogService)
             : base(navigationService)
         {
             GetFavoriteCitiesAndWeatherCommand = new DelegateCommand(async () => await GetFavoriteCitiesAndWeather());
@@ -36,6 +49,8 @@ namespace OpenWeatherStefanini.ViewModels
             ItemTappedCommand = new DelegateCommand<City>(ShowCityDetails);
             _resourceDataService = resourceDataService;
             _favoriteCityService = favoriteCityService;
+            _restService = restService;
+            _pageDialogService = pageDialogService;
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)
@@ -45,15 +60,36 @@ namespace OpenWeatherStefanini.ViewModels
 
         private async Task GetFavoriteCitiesAndWeather()
         {
+            var allCities = _resourceDataService.GetCities();
+            var favoriteKeys = await _favoriteCityService.GetFavoriteCitiesAsync();
             IsBusy = true;
-            try
+
+            if (favoriteKeys.Any())
             {
-                var allCities = _resourceDataService.GetCities();
-                var favoriteKeys = await _favoriteCityService.GetFavoriteCitiesAsync();
-                Cities = new ObservableCollection<City>(allCities.Where(c => favoriteKeys.Select(f => f.Key).Contains(c.Id)));
-            } finally
+                NofavoriteCities = false;
+                var favoriteCities = allCities.Where(c => favoriteKeys.Select(f => f.Key).Contains(c.Id));
+                var tasks = new List<Task>();
+                foreach (var item in favoriteCities)
+                {
+                    tasks.Add(Task.Run(async () => item.Weather = await _restService.GetWeather(item.Id)));
+                }
+
+                var continuation = Task.WhenAll(tasks);
+
+                try
+                {
+                    continuation.Wait();
+                    Cities = new ObservableCollection<City>(favoriteCities);
+                } catch (Exception)
+                {
+                    await _pageDialogService.DisplayAlertAsync(Message.MessageText, Message.FetchWeatherDataFailed, Message.Ok);
+                } finally
+                {
+                    IsBusy = false;
+                }
+            } else
             {
-                IsBusy = false;
+                NofavoriteCities = true;
             }
         }
 
