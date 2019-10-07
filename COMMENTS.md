@@ -13,4 +13,5 @@
 
 ### O que poderia melhorar com mais tempo
 - Redução do tamanho do aplicativo utilizando a ferramenta linker.
+- Otimização em ambas as plataformas (Android e iOS), todo o desenvolvimento foi testado somente no Android.
 - Criar testes unitários.

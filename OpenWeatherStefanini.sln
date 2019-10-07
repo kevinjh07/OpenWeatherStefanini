@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.852
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenWeatherStefanini", "OpenWeatherStefanini\OpenWeatherStefanini\OpenWeatherStefanini.csproj", "{11EF863C-FB1F-4815-B639-2DF5E27BE05A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenWeatherStefanini", "OpenWeatherStefanini\OpenWeatherStefanini\OpenWeatherStefanini.csproj", "{11EF863C-FB1F-4815-B639-2DF5E27BE05A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenWeatherStefanini.Android", "OpenWeatherStefanini\OpenWeatherStefanini.Android\OpenWeatherStefanini.Android.csproj", "{41078917-38FA-456E-ADAB-AD502F705E71}"
 EndProject
