@@ -4,8 +4,10 @@
              xmlns:prism="http://prismlibrary.com"
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="OpenWeatherStefanini.Views.CitiesPage"
-             Title="Selecione a cidade">
+             x:Class="OpenWeatherStefanini.Views.CitiesPage">
+    <NavigationPage.TitleView>
+        <Label Text="Selecione a cidade" HorizontalOptions="StartAndExpand" VerticalOptions="Center" TextColor="White" FontSize="Medium" />
+    </NavigationPage.TitleView>
     <ContentPage.Content>
         <ContentView>
             <ContentView.Content>
@@ -21,7 +23,9 @@
                     </ListView.Header>
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <TextCell Text="{Binding Name}" />
+                            <ViewCell>
+                                <Label Text="{Binding Name}" Style="{StaticResource LabelCenterStyle}" />
+                            </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>

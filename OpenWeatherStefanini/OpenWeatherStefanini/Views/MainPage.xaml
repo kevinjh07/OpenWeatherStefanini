@@ -3,8 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              xmlns:converters="clr-namespace:OpenWeatherStefanini.Converters"
-             x:Class="OpenWeatherStefanini.Views.MainPage"
-             Title="Clima">
+             x:Class="OpenWeatherStefanini.Views.MainPage">
+    <NavigationPage.TitleView>
+        <Label Text="Clima" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" TextColor="White" FontSize="Medium" />
+    </NavigationPage.TitleView>
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:InverseBooleanConverter x:Key="InverseBooleanConverter" />

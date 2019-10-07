@@ -4,8 +4,10 @@
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
              xmlns:converters="clr-namespace:OpenWeatherStefanini.Converters"
-             x:Class="OpenWeatherStefanini.Views.CityDetailsPage"
-             Title="Detalhes">
+             x:Class="OpenWeatherStefanini.Views.CityDetailsPage">
+    <NavigationPage.TitleView>
+        <Label Text="Detalhes" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" TextColor="White" FontSize="Medium" />
+    </NavigationPage.TitleView>
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:FavoritedCityToIconConverter x:Key="FavoritedCityToIconConverter" />
