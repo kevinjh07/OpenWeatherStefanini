@@ -5,5 +5,7 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="OpenWeatherStefanini.Views.CityDetailsPage"
              Title="Detalhes">
-  
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Favorito" Order="Primary" Icon="ic_fa_star_o.png" />
+    </ContentPage.ToolbarItems>
 </ContentPage>
