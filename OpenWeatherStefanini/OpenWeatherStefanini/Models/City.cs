@@ -11,5 +11,7 @@
         public string Name { get; set; }
 
         public int Zoom { get; set; }
+
+        public bool Favorited { get; set; }
     }
 }

@@ -5,13 +5,15 @@
              x:Class="OpenWeatherStefanini.Views.MainPage"
              Title="Clima">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Pesquisar" Order="Primary" Icon="ic_fa_search.png" Command="{Binding CitiesPageCommand}" />
+        <ToolbarItem Icon="ic_fa_search.png" Command="{Binding CitiesPageCommand}" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <ContentView>
             <ContentView.Content>
                 <StackLayout>
-                    <ListView ItemsSource="{Binding Cities}" IsRefreshing="{Binding IsBusy}" HasUnevenRows="True">
+                    <ListView ItemsSource="{Binding Cities}" HasUnevenRows="True"
+                              IsPullToRefreshEnabled="True" IsRefreshing="{Binding IsBusy}"
+                              RefreshCommand="{Binding GetFavoriteCitiesAndWeatherCommand}">
                         <ListView.Behaviors>
                             <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding ItemTappedCommand}"
                                                       EventArgsParameterPath="Item"/>
@@ -23,9 +25,9 @@
                                     <ColumnDefinition Width="1*" />
                                     <ColumnDefinition Width="1*" />
                                 </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0" Text="Cidade" Style="{StaticResource LabelHeaderStyle}" />
-                                <Label Grid.Column="1" Text="Clima" Style="{StaticResource LabelHeaderStyle}" />
-                                <Label Grid.Column="2" Text="Temp" Style="{StaticResource LabelHeaderStyle}" />
+                                <Label Grid.Column="0" Text="Cidade" Style="{StaticResource LabelCenterStyle}" FontAttributes="Bold" />
+                                <Label Grid.Column="1" Text="Clima" Style="{StaticResource LabelCenterStyle}" FontAttributes="Bold" />
+                                <Label Grid.Column="2" Text="Temp" Style="{StaticResource LabelCenterStyle}" FontAttributes="Bold" />
                             </Grid>
                         </ListView.Header>
                         <ListView.ItemTemplate>
@@ -37,9 +39,9 @@
                                             <ColumnDefinition Width="1*" />
                                             <ColumnDefinition Width="1*" />
                                         </Grid.ColumnDefinitions>
-                                        <Label Grid.Column="0" Text="{Binding Name}" />
-                                        <Label Grid.Column="1" Text="{Binding Weather}" />
-                                        <Label Grid.Column="2" Text="{Binding Temp}" />
+                                        <Label Grid.Column="0" Text="{Binding Name}" Style="{StaticResource LabelCenterStyle}" />
+                                        <Label Grid.Column="1" Text="{Binding Weather}" Style="{StaticResource LabelCenterStyle}" />
+                                        <Label Grid.Column="2" Text="{Binding Temp}" Style="{StaticResource LabelCenterStyle}" />
                                     </Grid>
                                 </ViewCell>
                             </DataTemplate>

@@ -6,18 +6,12 @@
     <Application.Resources>
         <ResourceDictionary>
             <Color x:Key="Gray200">#EEEEEE</Color>
-            <Style x:Key="LabelHeaderStyle" TargetType="{x:Type Label}">
+            <Style x:Key="LabelCenterStyle" TargetType="{x:Type Label}">
                 <Setter Property="HorizontalOptions" Value="Start" />
                 <Setter Property="VerticalOptions" Value="Center" />
                 <Setter Property="HorizontalTextAlignment" Value="Start" />
                 <Setter Property="VerticalTextAlignment" Value="Center" />
-                <Setter Property="FontAttributes" Value="Bold" />
                 <Setter Property="Margin" Value="5, 0, 0, 0" />
-                <Setter Property="FontSize">
-                    <Setter.Value>
-                        <OnPlatform iOS="{Binding Path=NamedFontSize, Source={x:Static Application.Current}}" />
-                    </Setter.Value>
-                </Setter>
             </Style>
         </ResourceDictionary>
     </Application.Resources>

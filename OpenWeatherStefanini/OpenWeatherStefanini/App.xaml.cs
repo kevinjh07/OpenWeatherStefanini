@@ -5,6 +5,7 @@ using OpenWeatherStefanini.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using OpenWeatherStefanini.Utils;
+using OpenWeatherStefanini.Services;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace OpenWeatherStefanini
@@ -20,10 +21,6 @@ namespace OpenWeatherStefanini
 
         public App(IPlatformInitializer initializer) : base(initializer) { }
 
-        public double NamedFontSize {
-            get { return Device.GetNamedSize(NamedSize.Small, typeof(Label)); }
-        }
-
         protected override async void OnInitialized()
         {
             InitializeComponent();
@@ -33,10 +30,17 @@ namespace OpenWeatherStefanini
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            #region Pages
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
             containerRegistry.RegisterForNavigation<CitiesPage, CitiesPageViewModel>();
             containerRegistry.RegisterForNavigation<CityDetailsPage, CityDetailsPageViewModel>();
+            #endregion
+
+            #region Services
+            containerRegistry.RegisterSingleton<FavoriteCityService>();
+            containerRegistry.RegisterSingleton<ResourceDataService>();
+            #endregion
         }
     }
 }

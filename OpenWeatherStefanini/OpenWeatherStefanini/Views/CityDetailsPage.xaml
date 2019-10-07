@@ -3,9 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:converter="clr-namespace:OpenWeatherStefanini.Converters"
              x:Class="OpenWeatherStefanini.Views.CityDetailsPage"
              Title="Detalhes">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:FavoritedCityToIconConverter x:Key="FavoritedCityToIconConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Favorito" Order="Primary" Icon="ic_fa_star_o.png" />
+        <ToolbarItem Icon="{Binding City.Favorited, Converter={StaticResource FavoritedCityToIconConverter}}" 
+                     Command="{Binding AddOrRemoveFavoriteCityCommand}" />
     </ContentPage.ToolbarItems>
 </ContentPage>

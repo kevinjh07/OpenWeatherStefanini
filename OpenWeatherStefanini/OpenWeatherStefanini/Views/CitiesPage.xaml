@@ -12,11 +12,11 @@
                 <ListView ItemsSource="{Binding Cities}" IsRefreshing="{Binding IsBusy}" HasUnevenRows="True">
                     <ListView.Behaviors>
                         <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding ItemTappedCommand}"
-                                                  EventArgsParameterPath="Item"/>
+                                                  EventArgsParameterPath="Item" />
                     </ListView.Behaviors>
                     <ListView.Header>
                         <StackLayout BackgroundColor="{StaticResource Gray200}">
-                            <Label Text="Cidade" Style="{StaticResource LabelHeaderStyle}" />
+                            <Label Text="Cidade" Style="{StaticResource LabelCenterStyle}" FontAttributes="Bold" />
                         </StackLayout>
                     </ListView.Header>
                     <ListView.ItemTemplate>
